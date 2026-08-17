@@ -148,7 +148,10 @@ export function StoreProvider({ children }: { children: ReactNode }) {
         const previous = list.find((r) => r.id === id);
         return {
           ...s,
-          records: { ...s.records, [moduleId]: list.map((r) => (r.id === id ? { ...r, ...row } : r)) },
+          records: {
+            ...s.records,
+            [moduleId]: list.map((r) => (r.id === id ? ({ ...r, ...row } as RecordRow) : r)),
+          },
           audit: [
             audit({
               moduleId,
