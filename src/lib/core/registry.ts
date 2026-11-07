@@ -1,5 +1,7 @@
 import type { ModuleDef } from "@/lib/core/types";
 import { professionalsModule } from "@/lib/modules/professionals";
+import { alunosModule } from "@/lib/modules/alunos";
+import { schoolsModule } from "@/lib/modules/schools";
 
 /**
  * REGISTRO DE MÓDULOS
@@ -10,7 +12,7 @@ import { professionalsModule } from "@/lib/modules/professionals";
  * dashboard e gerenciador de modelos) são geradas dinamicamente a
  * partir do modelo — nenhuma tela precisa ser reconstruída.
  */
-const modules: ModuleDef[] = [professionalsModule];
+const modules: ModuleDef[] = [professionalsModule, alunosModule, schoolsModule];
 
 export const listModules = (): ModuleDef[] => modules;
 

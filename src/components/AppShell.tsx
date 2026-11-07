@@ -14,9 +14,14 @@ import {
   Search,
   GraduationCap,
   UserCog,
+  LogOut,
+  User,
 } from "lucide-react";
 import { listModules } from "@/lib/core/registry";
+import { useAuth } from "@/lib/core/auth";
 import { cn } from "@/lib/utils";
+import { useNavigate } from "@tanstack/react-router";
+import { Button } from "@/components/ui/button";
 
 interface NavItem {
   label: string;
@@ -32,9 +37,12 @@ function useNav(): { section: string; items: NavItem[] }[] {
     {
       section: "Cadastros",
       items: [
-        ...modules.map((m) => ({ label: m.name, to: `/modulos/${m.id}`, icon: Users })),
-        { label: "Instituições de Ensino", to: "/em-preparacao", icon: Building2, soon: true },
-        { label: "Cadastros auxiliares", to: "/em-preparacao", icon: Boxes, soon: true },
+        ...modules.map((m) => ({
+          label: m.name,
+          to: `/modulos/${m.id}`,
+          icon: m.id === "instituicoes" ? Building2 : m.id === "alunos" ? Boxes : Users,
+        })),
+        { label: "Cadastros auxiliares", to: "/cadastros-auxiliares", icon: Boxes },
       ],
     },
     {
@@ -71,6 +79,13 @@ export function AppShell({
 }) {
   const nav = useNav();
   const pathname = useRouterState({ select: (s) => s.location.pathname });
+  const { user, logout } = useAuth();
+  const navigate = useNavigate();
+
+  const handleLogout = () => {
+    logout();
+    navigate({ to: "/login" });
+  };
 
   return (
     <div className="min-h-screen lg:grid lg:grid-cols-[17rem_1fr]">
@@ -119,8 +134,20 @@ export function AppShell({
             </div>
           ))}
         </nav>
-        <div className="border-t border-sidebar-border px-5 py-3 text-xs text-sidebar-foreground/60">
-          Arquitetura modular · v1.0
+        <div className="border-t border-sidebar-border p-4">
+          <div className="mb-4 flex items-center gap-3">
+            <div className="flex h-9 w-9 items-center justify-center rounded-full bg-sidebar-accent text-sidebar-foreground">
+              <User className="h-5 w-5" />
+            </div>
+            <div className="flex flex-col text-sm">
+              <span className="font-medium">{user?.name}</span>
+              <span className="text-xs text-sidebar-foreground/60">{user?.role === "admin" ? "Administrador" : "Profissional"}</span>
+            </div>
+          </div>
+          <Button variant="outline" className="w-full justify-start text-sidebar-foreground bg-sidebar-accent/30 hover:bg-sidebar-accent/60" onClick={handleLogout}>
+            <LogOut className="mr-2 h-4 w-4" />
+            Sair do Sistema
+          </Button>
         </div>
       </aside>
 

@@ -10,33 +10,271 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as AuditoriaRouteImport } from './routes/auditoria'
+import { Route as BuscaRouteImport } from './routes/busca'
+import { Route as CadastroGestorRouteImport } from './routes/cadastro-gestor'
+import { Route as CadastroProfissionalRouteImport } from './routes/cadastro-profissional'
+import { Route as CadastrosAuxiliaresRouteImport } from './routes/cadastros-auxiliares'
+import { Route as ConfiguracoesRouteImport } from './routes/configuracoes'
+import { Route as ExportacaoRouteImport } from './routes/exportacao'
+import { Route as ImportacaoRouteImport } from './routes/importacao'
+import { Route as ImpressoesRouteImport } from './routes/impressoes'
+import { Route as LoginRouteImport } from './routes/login'
+import { Route as MeuCadastroRouteImport } from './routes/meu-cadastro'
+import { Route as ModelosRouteImport } from './routes/modelos'
+import { Route as RelatoriosRouteImport } from './routes/relatorios'
+import { Route as UsuariosRouteImport } from './routes/usuarios'
+import { Route as ModulosModuleIdRouteImport } from './routes/modulos/$moduleId'
+import { Route as PainelGestorIndexRouteImport } from './routes/painel-gestor/index'
+import { Route as PainelGestorMeuCadastroRouteImport } from './routes/painel-gestor/meu-cadastro'
+import { Route as PainelGestorNovoAlunoRouteImport } from './routes/painel-gestor/novo-aluno'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AuditoriaRoute = AuditoriaRouteImport.update({
+  id: '/auditoria',
+  path: '/auditoria',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const BuscaRoute = BuscaRouteImport.update({
+  id: '/busca',
+  path: '/busca',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const CadastroGestorRoute = CadastroGestorRouteImport.update({
+  id: '/cadastro-gestor',
+  path: '/cadastro-gestor',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const CadastroProfissionalRoute = CadastroProfissionalRouteImport.update({
+  id: '/cadastro-profissional',
+  path: '/cadastro-profissional',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const CadastrosAuxiliaresRoute = CadastrosAuxiliaresRouteImport.update({
+  id: '/cadastros-auxiliares',
+  path: '/cadastros-auxiliares',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ConfiguracoesRoute = ConfiguracoesRouteImport.update({
+  id: '/configuracoes',
+  path: '/configuracoes',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ExportacaoRoute = ExportacaoRouteImport.update({
+  id: '/exportacao',
+  path: '/exportacao',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ImportacaoRoute = ImportacaoRouteImport.update({
+  id: '/importacao',
+  path: '/importacao',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ImpressoesRoute = ImpressoesRouteImport.update({
+  id: '/impressoes',
+  path: '/impressoes',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const LoginRoute = LoginRouteImport.update({
+  id: '/login',
+  path: '/login',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const MeuCadastroRoute = MeuCadastroRouteImport.update({
+  id: '/meu-cadastro',
+  path: '/meu-cadastro',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ModelosRoute = ModelosRouteImport.update({
+  id: '/modelos',
+  path: '/modelos',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const RelatoriosRoute = RelatoriosRouteImport.update({
+  id: '/relatorios',
+  path: '/relatorios',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const UsuariosRoute = UsuariosRouteImport.update({
+  id: '/usuarios',
+  path: '/usuarios',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ModulosModuleIdRoute = ModulosModuleIdRouteImport.update({
+  id: '/modulos/$moduleId',
+  path: '/modulos/$moduleId',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const PainelGestorIndexRoute = PainelGestorIndexRouteImport.update({
+  id: '/painel-gestor/',
+  path: '/painel-gestor/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const PainelGestorMeuCadastroRoute = PainelGestorMeuCadastroRouteImport.update({
+  id: '/painel-gestor/meu-cadastro',
+  path: '/painel-gestor/meu-cadastro',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const PainelGestorNovoAlunoRoute = PainelGestorNovoAlunoRouteImport.update({
+  id: '/painel-gestor/novo-aluno',
+  path: '/painel-gestor/novo-aluno',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/auditoria': typeof AuditoriaRoute
+  '/busca': typeof BuscaRoute
+  '/cadastro-gestor': typeof CadastroGestorRoute
+  '/cadastro-profissional': typeof CadastroProfissionalRoute
+  '/cadastros-auxiliares': typeof CadastrosAuxiliaresRoute
+  '/configuracoes': typeof ConfiguracoesRoute
+  '/exportacao': typeof ExportacaoRoute
+  '/importacao': typeof ImportacaoRoute
+  '/impressoes': typeof ImpressoesRoute
+  '/login': typeof LoginRoute
+  '/meu-cadastro': typeof MeuCadastroRoute
+  '/modelos': typeof ModelosRoute
+  '/relatorios': typeof RelatoriosRoute
+  '/usuarios': typeof UsuariosRoute
+  '/modulos/$moduleId': typeof ModulosModuleIdRoute
+  '/painel-gestor/meu-cadastro': typeof PainelGestorMeuCadastroRoute
+  '/painel-gestor/novo-aluno': typeof PainelGestorNovoAlunoRoute
+  '/painel-gestor/': typeof PainelGestorIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/auditoria': typeof AuditoriaRoute
+  '/busca': typeof BuscaRoute
+  '/cadastro-gestor': typeof CadastroGestorRoute
+  '/cadastro-profissional': typeof CadastroProfissionalRoute
+  '/cadastros-auxiliares': typeof CadastrosAuxiliaresRoute
+  '/configuracoes': typeof ConfiguracoesRoute
+  '/exportacao': typeof ExportacaoRoute
+  '/importacao': typeof ImportacaoRoute
+  '/impressoes': typeof ImpressoesRoute
+  '/login': typeof LoginRoute
+  '/meu-cadastro': typeof MeuCadastroRoute
+  '/modelos': typeof ModelosRoute
+  '/relatorios': typeof RelatoriosRoute
+  '/usuarios': typeof UsuariosRoute
+  '/modulos/$moduleId': typeof ModulosModuleIdRoute
+  '/painel-gestor/meu-cadastro': typeof PainelGestorMeuCadastroRoute
+  '/painel-gestor/novo-aluno': typeof PainelGestorNovoAlunoRoute
+  '/painel-gestor': typeof PainelGestorIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/auditoria': typeof AuditoriaRoute
+  '/busca': typeof BuscaRoute
+  '/cadastro-gestor': typeof CadastroGestorRoute
+  '/cadastro-profissional': typeof CadastroProfissionalRoute
+  '/cadastros-auxiliares': typeof CadastrosAuxiliaresRoute
+  '/configuracoes': typeof ConfiguracoesRoute
+  '/exportacao': typeof ExportacaoRoute
+  '/importacao': typeof ImportacaoRoute
+  '/impressoes': typeof ImpressoesRoute
+  '/login': typeof LoginRoute
+  '/meu-cadastro': typeof MeuCadastroRoute
+  '/modelos': typeof ModelosRoute
+  '/relatorios': typeof RelatoriosRoute
+  '/usuarios': typeof UsuariosRoute
+  '/modulos/$moduleId': typeof ModulosModuleIdRoute
+  '/painel-gestor/meu-cadastro': typeof PainelGestorMeuCadastroRoute
+  '/painel-gestor/novo-aluno': typeof PainelGestorNovoAlunoRoute
+  '/painel-gestor/': typeof PainelGestorIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/'
+  fullPaths:
+    | '/'
+    | '/auditoria'
+    | '/busca'
+    | '/cadastro-gestor'
+    | '/cadastro-profissional'
+    | '/cadastros-auxiliares'
+    | '/configuracoes'
+    | '/exportacao'
+    | '/importacao'
+    | '/impressoes'
+    | '/login'
+    | '/meu-cadastro'
+    | '/modelos'
+    | '/relatorios'
+    | '/usuarios'
+    | '/modulos/$moduleId'
+    | '/painel-gestor/meu-cadastro'
+    | '/painel-gestor/novo-aluno'
+    | '/painel-gestor/'
   fileRoutesByTo: FileRoutesByTo
-  to: '/'
-  id: '__root__' | '/'
+  to:
+    | '/'
+    | '/auditoria'
+    | '/busca'
+    | '/cadastro-gestor'
+    | '/cadastro-profissional'
+    | '/cadastros-auxiliares'
+    | '/configuracoes'
+    | '/exportacao'
+    | '/importacao'
+    | '/impressoes'
+    | '/login'
+    | '/meu-cadastro'
+    | '/modelos'
+    | '/relatorios'
+    | '/usuarios'
+    | '/modulos/$moduleId'
+    | '/painel-gestor/meu-cadastro'
+    | '/painel-gestor/novo-aluno'
+    | '/painel-gestor'
+  id:
+    | '__root__'
+    | '/'
+    | '/auditoria'
+    | '/busca'
+    | '/cadastro-gestor'
+    | '/cadastro-profissional'
+    | '/cadastros-auxiliares'
+    | '/configuracoes'
+    | '/exportacao'
+    | '/importacao'
+    | '/impressoes'
+    | '/login'
+    | '/meu-cadastro'
+    | '/modelos'
+    | '/relatorios'
+    | '/usuarios'
+    | '/modulos/$moduleId'
+    | '/painel-gestor/meu-cadastro'
+    | '/painel-gestor/novo-aluno'
+    | '/painel-gestor/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  AuditoriaRoute: typeof AuditoriaRoute
+  BuscaRoute: typeof BuscaRoute
+  CadastroGestorRoute: typeof CadastroGestorRoute
+  CadastroProfissionalRoute: typeof CadastroProfissionalRoute
+  CadastrosAuxiliaresRoute: typeof CadastrosAuxiliaresRoute
+  ConfiguracoesRoute: typeof ConfiguracoesRoute
+  ExportacaoRoute: typeof ExportacaoRoute
+  ImportacaoRoute: typeof ImportacaoRoute
+  ImpressoesRoute: typeof ImpressoesRoute
+  LoginRoute: typeof LoginRoute
+  MeuCadastroRoute: typeof MeuCadastroRoute
+  ModelosRoute: typeof ModelosRoute
+  RelatoriosRoute: typeof RelatoriosRoute
+  UsuariosRoute: typeof UsuariosRoute
+  ModulosModuleIdRoute: typeof ModulosModuleIdRoute
+  PainelGestorMeuCadastroRoute: typeof PainelGestorMeuCadastroRoute
+  PainelGestorNovoAlunoRoute: typeof PainelGestorNovoAlunoRoute
+  PainelGestorIndexRoute: typeof PainelGestorIndexRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -48,11 +286,155 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/auditoria': {
+      id: '/auditoria'
+      path: '/auditoria'
+      fullPath: '/auditoria'
+      preLoaderRoute: typeof AuditoriaRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/busca': {
+      id: '/busca'
+      path: '/busca'
+      fullPath: '/busca'
+      preLoaderRoute: typeof BuscaRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/cadastro-gestor': {
+      id: '/cadastro-gestor'
+      path: '/cadastro-gestor'
+      fullPath: '/cadastro-gestor'
+      preLoaderRoute: typeof CadastroGestorRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/cadastro-profissional': {
+      id: '/cadastro-profissional'
+      path: '/cadastro-profissional'
+      fullPath: '/cadastro-profissional'
+      preLoaderRoute: typeof CadastroProfissionalRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/cadastros-auxiliares': {
+      id: '/cadastros-auxiliares'
+      path: '/cadastros-auxiliares'
+      fullPath: '/cadastros-auxiliares'
+      preLoaderRoute: typeof CadastrosAuxiliaresRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/configuracoes': {
+      id: '/configuracoes'
+      path: '/configuracoes'
+      fullPath: '/configuracoes'
+      preLoaderRoute: typeof ConfiguracoesRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/exportacao': {
+      id: '/exportacao'
+      path: '/exportacao'
+      fullPath: '/exportacao'
+      preLoaderRoute: typeof ExportacaoRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/importacao': {
+      id: '/importacao'
+      path: '/importacao'
+      fullPath: '/importacao'
+      preLoaderRoute: typeof ImportacaoRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/impressoes': {
+      id: '/impressoes'
+      path: '/impressoes'
+      fullPath: '/impressoes'
+      preLoaderRoute: typeof ImpressoesRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/login': {
+      id: '/login'
+      path: '/login'
+      fullPath: '/login'
+      preLoaderRoute: typeof LoginRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/meu-cadastro': {
+      id: '/meu-cadastro'
+      path: '/meu-cadastro'
+      fullPath: '/meu-cadastro'
+      preLoaderRoute: typeof MeuCadastroRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/modelos': {
+      id: '/modelos'
+      path: '/modelos'
+      fullPath: '/modelos'
+      preLoaderRoute: typeof ModelosRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/relatorios': {
+      id: '/relatorios'
+      path: '/relatorios'
+      fullPath: '/relatorios'
+      preLoaderRoute: typeof RelatoriosRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/usuarios': {
+      id: '/usuarios'
+      path: '/usuarios'
+      fullPath: '/usuarios'
+      preLoaderRoute: typeof UsuariosRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/modulos/$moduleId': {
+      id: '/modulos/$moduleId'
+      path: '/modulos/$moduleId'
+      fullPath: '/modulos/$moduleId'
+      preLoaderRoute: typeof ModulosModuleIdRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/painel-gestor/': {
+      id: '/painel-gestor/'
+      path: '/painel-gestor'
+      fullPath: '/painel-gestor/'
+      preLoaderRoute: typeof PainelGestorIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/painel-gestor/meu-cadastro': {
+      id: '/painel-gestor/meu-cadastro'
+      path: '/painel-gestor/meu-cadastro'
+      fullPath: '/painel-gestor/meu-cadastro'
+      preLoaderRoute: typeof PainelGestorMeuCadastroRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/painel-gestor/novo-aluno': {
+      id: '/painel-gestor/novo-aluno'
+      path: '/painel-gestor/novo-aluno'
+      fullPath: '/painel-gestor/novo-aluno'
+      preLoaderRoute: typeof PainelGestorNovoAlunoRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  AuditoriaRoute: AuditoriaRoute,
+  BuscaRoute: BuscaRoute,
+  CadastroGestorRoute: CadastroGestorRoute,
+  CadastroProfissionalRoute: CadastroProfissionalRoute,
+  CadastrosAuxiliaresRoute: CadastrosAuxiliaresRoute,
+  ConfiguracoesRoute: ConfiguracoesRoute,
+  ExportacaoRoute: ExportacaoRoute,
+  ImportacaoRoute: ImportacaoRoute,
+  ImpressoesRoute: ImpressoesRoute,
+  LoginRoute: LoginRoute,
+  MeuCadastroRoute: MeuCadastroRoute,
+  ModelosRoute: ModelosRoute,
+  RelatoriosRoute: RelatoriosRoute,
+  UsuariosRoute: UsuariosRoute,
+  ModulosModuleIdRoute: ModulosModuleIdRoute,
+  PainelGestorMeuCadastroRoute: PainelGestorMeuCadastroRoute,
+  PainelGestorNovoAlunoRoute: PainelGestorNovoAlunoRoute,
+  PainelGestorIndexRoute: PainelGestorIndexRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)

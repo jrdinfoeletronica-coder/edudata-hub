@@ -47,3 +47,12 @@ export function downloadFile(name: string, content: string, mime = "text/csv;cha
   a.click();
   URL.revokeObjectURL(url);
 }
+
+export async function downloadXlsx(name: string, sheetName: string, headers: string[], rows: (string | number)[][]) {
+  const XLSX = await import("xlsx");
+  const worksheetData = [headers, ...rows];
+  const worksheet = XLSX.utils.aoa_to_sheet(worksheetData);
+  const workbook = XLSX.utils.book_new();
+  XLSX.utils.book_append_sheet(workbook, worksheet, sheetName.slice(0, 31));
+  XLSX.writeFile(workbook, name);
+}

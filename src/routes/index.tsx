@@ -1,4 +1,4 @@
-import { createFileRoute, Link } from "@tanstack/react-router";
+import { createFileRoute, Link, redirect } from "@tanstack/react-router";
 import { Users, Boxes, Upload, History, Database, ArrowRight } from "lucide-react";
 import { AppShell } from "@/components/AppShell";
 import { listModules } from "@/lib/core/registry";
@@ -22,6 +22,18 @@ export const Route = createFileRoute("/")({
       },
     ],
   }),
+  beforeLoad: () => {
+    if (typeof window !== "undefined") {
+      const stored = localStorage.getItem("sgde-auth-v1");
+      if (!stored) {
+        throw redirect({ to: "/login" });
+      }
+      const user = JSON.parse(stored);
+      if (user.role !== "admin") {
+        throw redirect({ to: "/meu-cadastro" });
+      }
+    }
+  },
   component: Dashboard,
 });
 
