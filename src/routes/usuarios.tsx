@@ -17,36 +17,115 @@ export const Route = createFileRoute("/usuarios")({
   component: UsuariosPage,
 });
 
+import { useAuth } from "@/lib/core/auth";
+import { useState } from "react";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
+import {
+  Dialog,
+  DialogContent,
+  DialogHeader,
+  DialogTitle,
+  DialogFooter,
+} from "@/components/ui/dialog";
+import { UserPlus, Trash2 } from "lucide-react";
+
 function UsuariosPage() {
   const { getRecords } = useStore();
+  const { adminAccounts, createAdminAccount, deleteAdminAccount } = useAuth();
   const profs = getRecords("profissionais");
 
+  const [modalAdminOpen, setModalAdminOpen] = useState(false);
+  const [newAdminName, setNewAdminName] = useState("");
+  const [newAdminUser, setNewAdminUser] = useState("");
+  const [newAdminPass, setNewAdminPass] = useState("");
+
   const gestores = profs.filter((p) => p.cargo === "Gestor Escolar" || p.lotacao_inep);
+
+  const handleCreateAdmin = (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!newAdminName.trim() || !newAdminUser.trim() || !newAdminPass.trim()) {
+      toast.error("Preencha todos os campos.");
+      return;
+    }
+
+    const success = createAdminAccount(newAdminName, newAdminUser, newAdminPass);
+    if (success) {
+      toast.success(`Administrador "${newAdminName}" cadastrado com sucesso!`);
+      setNewAdminName("");
+      setNewAdminUser("");
+      setNewAdminPass("");
+      setModalAdminOpen(false);
+    } else {
+      toast.error("Já existe um administrador com esse nome de usuário.");
+    }
+  };
+
+  const handleDeleteAdmin = (id: string, name: string) => {
+    if (adminAccounts.length <= 1) {
+      toast.error("O sistema deve possuir pelo menos um administrador.");
+      return;
+    }
+    if (confirm(`Tem certeza que deseja remover o administrador "${name}"?`)) {
+      deleteAdminAccount(id);
+      toast.success("Administrador removido com sucesso.");
+    }
+  };
 
   return (
     <AppShell
       title="Usuários e Permissões de Acesso"
-      subtitle="Gerenciamento de credenciais, papéis de acesso e diretores das escolas"
+      subtitle="Gerenciamento de credenciais, administradores gerais e gestores das escolas"
     >
       <div className="space-y-6">
         {/* Administradores do Sistema */}
-        <div className="rounded-xl border bg-card p-6 shadow-sm">
-          <h3 className="font-display font-semibold text-base mb-4 flex items-center gap-2">
-            <Shield className="size-4 text-primary" /> Administradores Gerais
-          </h3>
-          <div className="rounded-lg border p-4 flex items-center justify-between">
-            <div className="flex items-center gap-3">
-              <div className="size-10 rounded-full bg-primary/10 flex items-center justify-center font-bold text-primary">
-                AD
-              </div>
-              <div>
-                <p className="font-semibold text-foreground">Administrador Geral</p>
-                <p className="text-xs text-muted-foreground">Usuário: admin · Acesso irrestrito a todos os módulos e configurações</p>
-              </div>
+        <div className="rounded-xl border bg-card p-6 shadow-sm space-y-4">
+          <div className="flex items-center justify-between border-b pb-4">
+            <div>
+              <h3 className="font-display font-semibold text-base flex items-center gap-2">
+                <Shield className="size-4 text-primary" /> Administradores Gerais do Sistema
+              </h3>
+              <p className="text-xs text-muted-foreground mt-0.5">
+                Usuários com permissão total para gerenciar modelos, configurações, backups e todos os módulos.
+              </p>
             </div>
-            <span className="rounded-full bg-emerald-100 dark:bg-emerald-950 px-2.5 py-0.5 text-xs font-semibold text-emerald-700 dark:text-emerald-300">
-              Ativo
-            </span>
+            <Button size="sm" onClick={() => setModalAdminOpen(true)}>
+              <UserPlus className="mr-1.5 size-4" /> Novo Administrador
+            </Button>
+          </div>
+
+          <div className="grid gap-3 sm:grid-cols-2">
+            {adminAccounts.map((adm) => (
+              <div key={adm.id} className="rounded-lg border p-4 flex items-center justify-between bg-muted/20">
+                <div className="flex items-center gap-3">
+                  <div className="size-10 rounded-full bg-primary/10 flex items-center justify-center font-bold text-primary text-sm uppercase">
+                    {adm.name.slice(0, 2)}
+                  </div>
+                  <div>
+                    <p className="font-semibold text-sm text-foreground">{adm.name}</p>
+                    <p className="text-xs text-muted-foreground">
+                      Usuário: <strong className="text-foreground">{adm.username}</strong> · Criado em: {adm.createdAt}
+                    </p>
+                  </div>
+                </div>
+                <div className="flex items-center gap-2">
+                  <span className="rounded-full bg-emerald-100 dark:bg-emerald-950 px-2 py-0.5 text-[10px] font-semibold text-emerald-700 dark:text-emerald-300">
+                    Admin
+                  </span>
+                  {adminAccounts.length > 1 && (
+                    <Button
+                      variant="ghost"
+                      size="icon"
+                      className="size-8 text-destructive"
+                      onClick={() => handleDeleteAdmin(adm.id, adm.name)}
+                      title="Excluir este administrador"
+                    >
+                      <Trash2 className="size-3.5" />
+                    </Button>
+                  )}
+                </div>
+              </div>
+            ))}
           </div>
         </div>
 
@@ -104,6 +183,65 @@ function UsuariosPage() {
           </div>
         </div>
       </div>
+
+      {/* Modal para Cadastrar Novo Administrador */}
+      <Dialog open={modalAdminOpen} onOpenChange={setModalAdminOpen}>
+        <DialogContent className="max-w-md">
+          <DialogHeader>
+            <DialogTitle className="flex items-center gap-2">
+              <Shield className="size-5 text-primary" /> Cadastrar Novo Administrador
+            </DialogTitle>
+          </DialogHeader>
+
+          <form onSubmit={handleCreateAdmin} className="space-y-4 pt-2">
+            <div className="space-y-1.5">
+              <Label htmlFor="adminName">Nome Completo</Label>
+              <Input
+                id="adminName"
+                placeholder="Ex: Carlos Eduardo Silva"
+                value={newAdminName}
+                onChange={(e) => setNewAdminName(e.target.value)}
+                required
+              />
+            </div>
+
+            <div className="space-y-1.5">
+              <Label htmlFor="adminUsername">Nome de Usuário (Login)</Label>
+              <Input
+                id="adminUsername"
+                placeholder="Ex: carloseduardo"
+                value={newAdminUser}
+                onChange={(e) => setNewAdminUser(e.target.value)}
+                required
+              />
+              <p className="text-[11px] text-muted-foreground">
+                Será utilizado na tela de login na aba "Admin".
+              </p>
+            </div>
+
+            <div className="space-y-1.5">
+              <Label htmlFor="adminPassword">Senha de Acesso</Label>
+              <Input
+                id="adminPassword"
+                type="password"
+                placeholder="Digite a senha..."
+                value={newAdminPass}
+                onChange={(e) => setNewAdminPass(e.target.value)}
+                required
+              />
+            </div>
+
+            <DialogFooter className="pt-2">
+              <Button type="button" variant="outline" onClick={() => setModalAdminOpen(false)}>
+                Cancelar
+              </Button>
+              <Button type="submit">
+                Criar Administrador
+              </Button>
+            </DialogFooter>
+          </form>
+        </DialogContent>
+      </Dialog>
     </AppShell>
   );
 }

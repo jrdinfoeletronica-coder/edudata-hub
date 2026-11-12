@@ -32,13 +32,14 @@ function Login() {
   const [gestorMatricula, setGestorMatricula] = useState("");
   const [gestorCpf, setGestorCpf] = useState("");
 
-  const handleAdminLogin = (e: React.FormEvent) => {
+  const handleAdminLogin = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (adminUser === "admin" && adminPass === "admin123") {
-      loginAdmin();
+    console.log('handleAdminLogin - adminUser:', adminUser, 'adminPass:', adminPass);
+    const success = await loginAdmin(adminUser, adminPass);
+    if (success) {
       navigate({ to: "/" });
     } else {
-      toast.error("Credenciais de administrador inválidas.");
+      toast.error("Usuário ou senha de administrador inválidos.");
     }
   };
 
