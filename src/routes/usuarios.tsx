@@ -42,14 +42,14 @@ function UsuariosPage() {
 
   const gestores = profs.filter((p) => p.cargo === "Gestor Escolar" || p.lotacao_inep);
 
-  const handleCreateAdmin = (e: React.FormEvent) => {
+  const handleCreateAdmin = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!newAdminName.trim() || !newAdminUser.trim() || !newAdminPass.trim()) {
       toast.error("Preencha todos os campos.");
       return;
     }
 
-    const success = createAdminAccount(newAdminName, newAdminUser, newAdminPass);
+    const success = await createAdminAccount(newAdminName, newAdminUser, newAdminPass);
     if (success) {
       toast.success(`Administrador "${newAdminName}" cadastrado com sucesso!`);
       setNewAdminName("");

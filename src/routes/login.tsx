@@ -15,7 +15,7 @@ export const Route = createFileRoute("/login")({
 });
 
 function Login() {
-  const { loginAdmin, loginProfissional } = useAuth();
+  const { loginAdmin, loginProfissional, loginGestor } = useAuth();
   const { getRecords } = useStore();
   const navigate = useNavigate();
 
